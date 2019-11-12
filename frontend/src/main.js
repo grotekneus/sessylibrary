@@ -2,8 +2,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import BootstrapVue from 'bootstrap-vue';
+
 import App from './App.vue';
 import Home from './Home.vue';
+import BoekDetail from './BoekDetail.vue'
 
 Vue.use(BootstrapVue)
 Vue.use(VueRouter)
@@ -20,6 +22,7 @@ const bootstrapApp = (router) => {
 const router = new VueRouter({
     routes: [
         { path: '/', component: Home },
+        { path: '/detail/:isbn', component: BoekDetail },
         { path: '*', component: Home }
     ]
 })

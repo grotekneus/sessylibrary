@@ -27,6 +27,25 @@ jar {
     }
 }
 
+task frontendSync(type: Copy) {
+    dependsOn 'npmBuild'
+    
+    from 'frontend/dist'
+    into 'src/main/resources/assets/'
+}
+
+task npmBuild(type: Exec) {
+    description = 'Builds frontend Vuejs using node'
+    workingDir 'frontend/dist'
+    commandLine 'npm'
+    args 'run', 'build'
+
+    standardOutput = new ByteArrayOutputStream()
+    ext.output = {
+        return standardOutput.toString()
+    }
+}
+
 // https://imperceptiblethoughts.com/shadow/configuration/dependencies/#filtering-dependencies
 shadowJar {
     mergeServiceFiles() // same as Maven's ServiceResourceTransformer

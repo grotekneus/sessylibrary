@@ -19,7 +19,7 @@ public class SessyLibApplication extends Application<SessyLibConfig> {
 
     @Override
     public void initialize(Bootstrap<SessyLibConfig> bootstrap) {
-        bootstrap.addBundle(new AssetsBundle("/assets/", "/"));
+        bootstrap.addBundle(new AssetsBundle("/assets/", "/", "index.html"));
     }
 
     @Override

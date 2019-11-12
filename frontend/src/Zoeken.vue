@@ -2,7 +2,7 @@
     <div>
 
         <div class="zoekcontainer">
-            <h3><i class="fas fa-question-circle"></i>&nbsp;Zoeken</h3>
+            <h3><i class="fas fa-search"></i>&nbsp;Zoeken</h3>
             <p>&nbsp;</p>
 
             <div class="container">
@@ -22,21 +22,68 @@
             <h3>&nbsp;</h3>
         </div>
 
-        <div class="container resultcontainer">
-            {{ results }}
+        <div class="resultcontainer" v-if="results.length > 0">
+            <hr/>
+            <h3><i class="fas fa-list"></i>&nbsp;Resultaten</h3>
+
+            <div class="container">
+                <div v-for="boekengroep in resultSplitByCardGroups()" v-bind:key="boekengroep.id">
+                    <b-card-group deck>
+                        <b-card class="boek mb-2"
+                                border-variant="dark"
+                                v-for="boek in boekengroep.boeken"
+                                v-bind:key="boek.isbn"
+                                :header="boek.author"
+                                :title="boek.title"
+                                :img-src="boek.thumbnail"
+                                :img-alt="boek.title"
+                                img-top
+                                tag="article"
+                                style="max-width: 20rem;">
+                            <b-card-text>
+                                {{ boek.beschrijving }}
+                            </b-card-text>
+
+                            <b-button :href="boek.url" variant="primary">Naar detail</b-button>
+                        </b-card>
+                    </b-card-group>
+                </div>
+                </div>
+            </div>
         </div>
 
     </div>
 </template>
 
 <script>
+    const exampleBoek = (isbn) => {
+        return {
+            isbn,
+            title: "Daarheen en weer terug",
+            author: "Bilbo Baggings",
+            thumbnail: "bla.png",
+            beschrijving: "One ring to rule them all!",
+            url: `/#/detail/${isbn}`
+        }
+    }
+
     export default {
         data() {
             return {
                 form: {
                     zoekterm: ''
                 },
-                results: []
+                results: [exampleBoek(1), exampleBoek(2), exampleBoek(3), exampleBoek(4), exampleBoek(5), exampleBoek(6), exampleBoek(7), exampleBoek(8)],
+                resultSplitByCardGroups: () => {
+                    let tosplit = [...this.results]
+                    let splitresult = []
+                    let i = 0
+                    while(tosplit.length > 0) {
+                        splitresult.push({ id: `boeken${i}`, boeken: tosplit.splice(0, 3)})
+                        i++
+                    }
+                    return splitresult
+                }
             }
         },
         name: 'zoeken',
@@ -64,9 +111,19 @@
         width: 10% !important;
     }
 
+    .resultcontainer {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        padding: 30px;
+    }
+
+    .resultcontainer h3 {
+        padding-bottom: 20px;
+    }
+
     .zoekcontainer {
         margin-top: 30px;
-        marign-bottom: 30px;
+        margin-bottom: 30px;
         padding: 30px;
         background-image: url('https://brainbaking.com//img/2017inbooks.png');
     }
