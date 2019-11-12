@@ -30,7 +30,18 @@ The compiled vuejs webpage should be copied to `src/main/resources/assets` - `in
 
 Students **do not need to edit** the frontend part of this application and may consider this as a 'given'. 
 
+Building and running the Frontend source:
+
+1. `npm install` in the frontend subdir
+2. `npm run serve` in the frontend subdir
+
+Your project should be running at `http://localhost:8080` now.
+
 ### What should I do with this?
 
 TODO
- 
+
+### Resources
+
+* [DropWizard: Getting Started](https://dropwizard.io/en/stable/getting-started.html) 
+
