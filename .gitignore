@@ -1,2 +1,5 @@
 build/
 gradle/
+.gradle/
+.idea/
+.DS_Store
