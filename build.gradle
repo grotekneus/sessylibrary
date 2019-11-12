@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+group 'be.kuleuven'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.10
+
+repositories {
+    mavenCentral()
+}
+
+project.ext {
+    dropwizardVersion = '2.0.0-rc12'
+    mainClassName = 'be.kuleuven.sessylibrary.SessyLibApplication'
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': rootProject.name
+        attributes 'Implementation-Version': rootProject.version
+        attributes 'Implementation-Vendor-Id': rootProject.group
+        attributes 'Created-By': 'Gradle ' + gradle.gradleVersion
+        attributes 'Main-Class': mainClassName
+    }
+}
+
+// https://imperceptiblethoughts.com/shadow/configuration/dependencies/#filtering-dependencies
+shadowJar {
+    mergeServiceFiles() // same as Maven's ServiceResourceTransformer
+    exclude '*.DSA', '*.SF', '*.RSA'
+}
+
+dependencies {
+    compile group: 'io.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
+    compile group: 'io.dropwizard', name: 'dropwizard-assets', version: dropwizardVersion
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
