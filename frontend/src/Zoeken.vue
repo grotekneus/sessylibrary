@@ -41,7 +41,7 @@
                                 tag="article"
                                 style="max-width: 20rem;">
                             <b-card-text>
-                                {{ boek.beschrijving }}
+                                {{ boek.description }}
                             </b-card-text>
 
                             <b-button :href="boek.url" variant="primary">Naar detail</b-button>
@@ -62,7 +62,7 @@
             title: "Daarheen en weer terug",
             author: "Bilbo Baggings",
             thumbnail: "bla.png",
-            beschrijving: "One ring to rule them all!",
+            description: "One ring to rule them all!",
             url: `/#/detail/${isbn}`
         }
     }
