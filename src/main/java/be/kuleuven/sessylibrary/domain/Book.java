@@ -15,7 +15,7 @@ public class Book {
         this.title = title;
         this.author = author;
         this.thumbnail = thumbnail;
-        this.description = beschrijving;
+        this.description = beschrijving.replace("\n", "");
     }
 
     public String getDescription() {

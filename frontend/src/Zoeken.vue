@@ -55,7 +55,9 @@
                                 {{ boek.description | truncate(300, '...') }}
                             </b-card-text>
 
-                            <b-button :href="boek.url" variant="primary">Naar detail</b-button>
+                            <template v-slot:footer>
+                                <b-button :href="boek.url" variant="primary">Naar detail</b-button>
+                            </template>
                         </b-card>
                     </b-card-group>
                 </div>
