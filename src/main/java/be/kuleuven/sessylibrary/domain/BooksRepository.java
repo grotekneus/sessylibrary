@@ -18,8 +18,11 @@ public interface BooksRepository {
     @SqlUpdate("INSERT INTO books(isbn, title, author, thumbnail, description) VALUES (:isbn, :title, :author, :thumbnail, :description)")
     void insert(@BindBean Book book);
 
-    @SqlQuery("SELECT * FROM books WHERE title LIKE '%' || :title || '%'")
-    //@SqlQuery("SELECT * FROM books WHERE title = :title")
+    @SqlQuery("SELECT * FROM books where isbn = ?")
+    @RegisterBeanMapper(Book.class)
+    Book findBookByIsbn(int isbn);
+
+    @SqlQuery("SELECT * FROM books WHERE LOWER(title) LIKE '%' || :title || '%'")
     @RegisterBeanMapper(Book.class)
     List<Book> findBooksByTitle(@Bind("title") String title);
 }

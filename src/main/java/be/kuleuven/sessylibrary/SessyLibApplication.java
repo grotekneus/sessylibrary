@@ -1,8 +1,9 @@
 package be.kuleuven.sessylibrary;
 
+import be.kuleuven.sessylibrary.api.BookDetailResource;
 import be.kuleuven.sessylibrary.api.FindBooksResource;
-import be.kuleuven.sessylibrary.domain.Book;
 import be.kuleuven.sessylibrary.domain.BooksRepository;
+import be.kuleuven.sessylibrary.domain.FavoriteBooks;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.jdbi3.JdbiFactory;
@@ -43,14 +44,13 @@ public class SessyLibApplication extends Application<SessyLibConfig> {
 
         var booksRepo = db.onDemand(BooksRepository.class);
         booksRepo.createTable();
-        booksRepo.insert(new Book(123456, "title 1", "author", "thumbnail1.png", "my nice book one"));
-        booksRepo.insert(new Book(123457, "title 2", "author", "thumbnail2.png", "my nice book two"));
+        FavoriteBooks.WoutersFavorites().stream().forEach(book -> booksRepo.insert(book));
 
         return db;
     }
 
     private void registerRESTResources(Environment environment, Jdbi dbInstance) {
-        final var findBooks = new FindBooksResource(dbInstance);
-        environment.jersey().register(findBooks);
+        environment.jersey().register(new FindBooksResource(dbInstance));
+        environment.jersey().register(new BookDetailResource(dbInstance));
     }
 }

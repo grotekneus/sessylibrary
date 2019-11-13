@@ -10,7 +10,6 @@
                 <b-form @submit="onSubmit" inline>
                     <b-form-input
                             v-model="form.zoekterm"
-                            required
                             id="searchterm"
                             class="mb-2 mr-sm-2 mb-sm-0"
                             placeholder="bvb. 'Lord of the Rings'"
@@ -20,6 +19,18 @@
             </div>
 
             <h3>&nbsp;</h3>
+        </div>
+
+        <div class="resultcontainer" v-if="results.length == 0">
+            <div v-if="searchExecuted">
+                <hr/>
+                <h3><i class="fas fa-list"></i>&nbsp;Geen resultaten gevonden!</h3>
+
+                <div class="container">
+                    Probeer eens met een andere zoekterm. <br/>
+                    Zijn er nog wel boeken in de bibliotheek?
+                </div>
+            </div>
         </div>
 
         <div class="resultcontainer" v-if="results.length > 0">
@@ -41,7 +52,7 @@
                                 tag="article"
                                 style="max-width: 20rem;">
                             <b-card-text>
-                                {{ boek.description }}
+                                {{ boek.description | truncate(300, '...') }}
                             </b-card-text>
 
                             <b-button :href="boek.url" variant="primary">Naar detail</b-button>
@@ -56,15 +67,12 @@
 </template>
 
 <script>
-    const exampleBoek = (isbn) => {
-        return {
-            isbn,
-            title: "Daarheen en weer terug",
-            author: "Bilbo Baggings",
-            thumbnail: "bla.png",
-            description: "One ring to rule them all!",
-            url: `/#/detail/${isbn}`
-        }
+    import axios from "axios"
+    import { handle } from './errorhandling.js'
+
+    const addUrlToBook = (book) => {
+        book.url = `/#/detail/${book.isbn}`
+        return book
     }
 
     export default {
@@ -73,7 +81,8 @@
                 form: {
                     zoekterm: ''
                 },
-                results: [exampleBoek(1), exampleBoek(2), exampleBoek(3), exampleBoek(4), exampleBoek(5), exampleBoek(6), exampleBoek(7), exampleBoek(8)],
+                results: [],
+                searchExecuted: false,
                 resultSplitByCardGroups: () => {
                     let tosplit = [...this.results]
                     let splitresult = []
@@ -89,8 +98,14 @@
         name: 'zoeken',
         methods: {
             onSubmit(evt) {
-               evt.preventDefault()
-                this.results.push(this.form.zoekterm)
+                this.results.splice(0)
+                evt.preventDefault()
+
+                axios.get(`/api/find-books?title=${this.form.zoekterm}`)
+                    .then(response => {
+                        this.searchExecuted = true
+                        response.data.forEach(book => this.results.push(addUrlToBook(book)))
+                    }).catch(err => handle(this, err))
             }
         },
         components: {

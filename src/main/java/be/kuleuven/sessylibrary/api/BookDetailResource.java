@@ -8,19 +8,19 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
 import java.util.Optional;
 
-@Path("/find-books")
+@Path("/get-book")
 @Produces(MediaType.APPLICATION_JSON)
-public class FindBooksResource extends BooksResource {
+public class BookDetailResource extends BooksResource {
 
-    public FindBooksResource(Jdbi dbInstance) {
+    public BookDetailResource(Jdbi dbInstance) {
         super(dbInstance);
     }
 
     @GET
-    public List<Book> find(@QueryParam("title")Optional<String> title) {
-        return booksRepository.findBooksByTitle(title.orElse("").toLowerCase());
+    public Book find(@QueryParam("isbn") Optional<Integer> isbn) {
+        return booksRepository.findBookByIsbn(isbn.orElse(666));
     }
+
 }

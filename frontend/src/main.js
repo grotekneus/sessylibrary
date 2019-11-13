@@ -16,8 +16,17 @@ const bootstrapApp = (router) => {
     new Vue({
         router: router,
         render: h => h(App),
-}).$mount('#app')
+    }).$mount('#app')
 }
+
+const truncateFilter = (text, length, clamp) => {
+    clamp = clamp || '...';
+    let node = document.createElement('div');
+    node.innerHTML = text;
+    const content = node.textContent;
+    return content.length > length ? content.slice(0, length) + clamp : content;
+}
+Vue.filter('truncate', truncateFilter)
 
 const router = new VueRouter({
     routes: [
