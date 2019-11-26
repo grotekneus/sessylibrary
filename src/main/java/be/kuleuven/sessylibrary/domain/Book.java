@@ -6,6 +6,7 @@ public class Book {
     private String author;
     private String thumbnail;
     private String description;
+    private boolean borrowed;
 
     public Book() {
     }
@@ -16,6 +17,18 @@ public class Book {
         this.author = author;
         this.thumbnail = thumbnail;
         this.description = beschrijving.replace("\n", "");
+    }
+
+    public boolean isBorrowed() {
+        return borrowed;
+    }
+
+    public void setBorrowed(boolean borrowed) {
+        this.borrowed = borrowed;
+    }
+
+    public void borrow() {
+        this.borrowed = true;
     }
 
     public String getDescription() {

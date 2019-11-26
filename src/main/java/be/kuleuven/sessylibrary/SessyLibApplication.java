@@ -1,7 +1,6 @@
 package be.kuleuven.sessylibrary;
 
-import be.kuleuven.sessylibrary.api.BookDetailResource;
-import be.kuleuven.sessylibrary.api.FindBooksResource;
+import be.kuleuven.sessylibrary.api.*;
 import be.kuleuven.sessylibrary.domain.BooksRepository;
 import be.kuleuven.sessylibrary.domain.FavoriteBooks;
 import io.dropwizard.Application;
@@ -9,6 +8,7 @@ import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.jdbi3.JdbiFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.eclipse.jetty.server.session.SessionHandler;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 
@@ -30,6 +30,7 @@ public class SessyLibApplication extends Application<SessyLibConfig> {
 
     @Override
     public void run(SessyLibConfig config, Environment environment) throws Exception {
+        environment.servlets().setSessionHandler(new SessionHandler());
         final Jdbi db = CreateDbInstance(config, environment);
 
         registerRESTResources(environment, db);
@@ -52,5 +53,9 @@ public class SessyLibApplication extends Application<SessyLibConfig> {
     private void registerRESTResources(Environment environment, Jdbi dbInstance) {
         environment.jersey().register(new FindBooksResource(dbInstance));
         environment.jersey().register(new BookDetailResource(dbInstance));
+        environment.jersey().register(new BorrowBooksResource(dbInstance));
+        environment.jersey().register(new LoginBadBorrowerResource());
+        environment.jersey().register(new LoginSpotlessBorrowerResource());
+        environment.jersey().register(new LogoutResource());
     }
 }

@@ -8,9 +8,9 @@
                         <Zoeken />
                     </b-card-text>
                 </b-tab>
-                <b-tab title="Uitleentermijn Verlengen">
+                <b-tab title="Inlogen om te Verlengen">
                     <b-card-text>
-                        <Verlengen />
+                        <Inloggen />
                     </b-card-text>
                 </b-tab>
                 <b-tab title="Openingsuren">
@@ -26,7 +26,7 @@
 
 <script>
     import Zoeken from './Zoeken.vue'
-    import Verlengen from './Verlengen.vue'
+    import Inloggen from './Inloggen.vue'
     import Openingsuren from './Openingsuren.vue'
 
     export default {
@@ -40,7 +40,7 @@
         },
         components: {
             Zoeken,
-            Verlengen,
+            Inloggen,
             Openingsuren
         }
     }
