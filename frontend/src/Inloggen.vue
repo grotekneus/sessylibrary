@@ -2,20 +2,20 @@
     <div class="container" style="margin-top: 10px;">
         <h3><i class="fas fa-user"></i>&nbsp;Inloggen</h3>
 
-        <span v-if="user !== undefined">
+        <span v-if="$global.loginuser.picid !== -1">
             <h4 >
-                U bent ingelogd als {{ user.name }}.
+                U bent ingelogd als {{ $global.loginuser.name }}.
             </h4>
 
             <p>
                 Welkom! <br/><br/>
-                <img :src="user.portrait" />
+                <img :src="$global.loginuser.portrait" />
             </p>
 
             <b-button @click="logout" variant="primary">Logout</b-button>
         </span>
 
-        <b-card-group deck v-if="user === undefined">
+        <b-card-group deck v-if="$global.loginuser.picid === -1">
             <b-card class="boek mb-3"
                     border-variant="dark"
                     title="Als Verstokte lezer"
@@ -64,7 +64,6 @@
         data() {
 
             return {
-                user: undefined
             }
         },
         name: 'inloggen',
@@ -73,17 +72,17 @@
                 axios.get(url)
                     .then(response => {
                         // if 200 OK then logged in
-                        this.user = {
-                            name: userToLogin.name,
-                            picid: userToLogin.picid,
-                            portrait: `https://picsum.photos/600/300/?image=${userToLogin.picid}`
-                        }
+                        this.$global.loginuser.name = userToLogin.name
+                        this.$global.loginuser.picid = userToLogin.picid
+                        this.$global.loginuser.portrait = `https://picsum.photos/600/300/?image=${userToLogin.picid}`
                     }).catch(err => handle(this, err))
             },
             logout() {
                 axios.get('/api/logout')
                     .then(response => {
-                        this.user = undefined
+                        this.$global.loginuser.portrait = ''
+                        this.$global.loginuser.name = 'Anoniempje'
+                        this.$global.loginuser.picid = -1
                     }).catch(err => handle(this, err))
             },
             loginVerstokteLezer() {

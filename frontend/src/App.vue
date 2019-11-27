@@ -5,7 +5,7 @@
             <router-link to="/">
         <span class="navbar-brand mb-0 h1">
           <i class="fas fa-book-reader"></i>&nbsp;
-          Welkom bij de 'SESsy Library'
+          Welkom bij de 'SESsy Library', {{ $global.loginuser.name }}
         </span>
             </router-link>
             <span class="navbar-nav mr-auto">

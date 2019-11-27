@@ -12,6 +12,24 @@ Vue.use(VueRouter)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+
+const global = new Vue({
+    data:{
+        loginuser: {
+            picid: -1,
+            name: 'Anoniempje',
+            portrait: ''
+        }
+    }
+})
+
+global.install = () => {
+    Object.defineProperty(Vue.prototype, '$global', {
+        get () { return global }
+    })
+}
+Vue.use(global)
+
 const bootstrapApp = (router) => {
     new Vue({
         router: router,
