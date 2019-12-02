@@ -13,27 +13,26 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Optional;
 
-@Path("/borrow")
+@Path("/bring-back")
 @Produces(MediaType.APPLICATION_JSON)
-public class BorrowBooksResource extends BooksResource {
+public class BringBackBookResource extends BooksResource {
 
-    public BorrowBooksResource(Jdbi dbInstance) {
+    public BringBackBookResource(Jdbi dbInstance) {
         super(dbInstance);
     }
 
     @GET
-    public Response borrow(@QueryParam("isbn") Optional<Integer> isbn, @Context HttpServletRequest request) {
+    public Response bringBack(@QueryParam("isbn") Optional<Integer> isbn, @Context HttpServletRequest request) {
         var book = booksRepository.findBookByIsbn(isbn.orElse(6666));
         if(book == null) {
             throw new UnsupportedOperationException("Book with isbn " + isbn + " not found!");
         }
 
         try {
-            new BookLendService().lend(book, requireUserFrom(request));
+            new BookLendService().bringBack(book, requireUserFrom(request));
         } catch(UnsupportedOperationException oe) {
             return Response.status(Response.Status.FORBIDDEN).build();
         }
         return Response.ok().build();
     }
-
 }

@@ -12,11 +12,16 @@ public class Book {
     }
 
     public Book(int isbn, String title, String author, String thumbnail, String beschrijving) {
+        this(isbn, title, author, thumbnail, beschrijving, false);
+    }
+
+    public Book(int isbn, String title, String author, String thumbnail, String beschrijving, boolean borrowed) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.thumbnail = thumbnail;
         this.description = beschrijving.replace("\n", "");
+        this.borrowed = borrowed;
     }
 
     public boolean isBorrowed() {
@@ -69,5 +74,9 @@ public class Book {
 
     public void setIsbn(int isbn) {
         this.isbn = isbn;
+    }
+
+    public void bringBack() {
+        this.borrowed = false;
     }
 }

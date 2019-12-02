@@ -57,6 +57,7 @@
 
                             <template v-slot:footer>
                                 <b-button :href="boek.url" variant="primary">Naar detail</b-button>
+                                <b-button v-if="boek.borrowed" variant="warning" style="float: right;">Uitgeleend!</b-button>
                             </template>
                         </b-card>
                     </b-card-group>
@@ -72,7 +73,7 @@
     import axios from "axios"
     import { handle } from './errorhandling.js'
 
-    const addUrlToBook = (book) => {
+    const toUIBook = (book) => {
         book.url = `/#/detail/${book.isbn}`
         return book
     }
@@ -106,7 +107,7 @@
                 axios.get(`/api/find-books?title=${this.form.zoekterm}`)
                     .then(response => {
                         this.searchExecuted = true
-                        response.data.forEach(book => this.results.push(addUrlToBook(book)))
+                        response.data.forEach(book => this.results.push(toUIBook(book)))
                     }).catch(err => handle(this, err))
             }
         },

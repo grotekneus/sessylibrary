@@ -8,4 +8,10 @@ public class BookLendService {
         // TODO unit test me!
         book.borrow();
     }
+
+    public void bringBack(Book book, User user) {
+        // TODO check if book needs bringing back? Unit test me!
+        // TODO call book repository .update() to save state into the DB
+        book.bringBack();
+    }
 }

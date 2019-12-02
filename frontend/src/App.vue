@@ -4,6 +4,10 @@
         <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
             <router-link to="/">
         <span class="navbar-brand mb-0 h1">
+            <img :src="'https://picsum.photos/id/' + $global.loginuser.picid + '/100/100'"
+                 style="position: absolute; right: 20px; border: 1px solid black;"
+                 :alt="'Gebruiker ' + $global.loginuser.name"
+            />
           <i class="fas fa-book-reader"></i>&nbsp;
           Welkom bij de 'SESsy Library', {{ $global.loginuser.name }}
         </span>

@@ -2,7 +2,7 @@
     <div class="container" style="margin-top: 10px;">
         <h3><i class="fas fa-user"></i>&nbsp;Inloggen</h3>
 
-        <span v-if="$global.loginuser.picid !== -1">
+        <span v-if="$global.loginuser.picid !== 1000">
             <h4 >
                 U bent ingelogd als {{ $global.loginuser.name }}.
             </h4>
@@ -15,7 +15,7 @@
             <b-button @click="logout" variant="primary">Logout</b-button>
         </span>
 
-        <b-card-group deck v-if="$global.loginuser.picid === -1">
+        <b-card-group deck v-if="$global.loginuser.picid === 1000">
             <b-card class="boek mb-3"
                     border-variant="dark"
                     title="Als Verstokte lezer"
@@ -80,9 +80,9 @@
             logout() {
                 axios.get('/api/logout')
                     .then(response => {
-                        this.$global.loginuser.portrait = ''
+                        this.$global.loginuser.portrait = 'https://picsum.photos/600/300/?image=1000'
                         this.$global.loginuser.name = 'Anoniempje'
-                        this.$global.loginuser.picid = -1
+                        this.$global.loginuser.picid = 1000
                     }).catch(err => handle(this, err))
             },
             loginVerstokteLezer() {

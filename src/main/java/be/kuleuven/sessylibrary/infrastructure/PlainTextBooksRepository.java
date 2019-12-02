@@ -43,6 +43,11 @@ public class PlainTextBooksRepository implements BooksRepository {
         }
     }
 
+    @Override
+    public void update(Book book) {
+
+    }
+
     private List<Book> findAllBooksInFile() {
         try {
             return Files.readAllLines(dbPath())

@@ -16,7 +16,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 const global = new Vue({
     data:{
         loginuser: {
-            picid: -1,
+            picid: 1000,
             name: 'Anoniempje',
             portrait: ''
         }

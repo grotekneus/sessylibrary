@@ -54,6 +54,7 @@ public class SessyLibApplication extends Application<SessyLibConfig> {
         environment.jersey().register(new FindBooksResource(dbInstance));
         environment.jersey().register(new BookDetailResource(dbInstance));
         environment.jersey().register(new BorrowBooksResource(dbInstance));
+        environment.jersey().register(new BringBackBookResource(dbInstance));
         environment.jersey().register(new LoginBadBorrowerResource());
         environment.jersey().register(new LoginSpotlessBorrowerResource());
         environment.jersey().register(new LogoutResource());
