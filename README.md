@@ -1,5 +1,7 @@
 # SESsy Library
 
+Deel van het vak [Software Engineering Skills](https://brainbaking.com/teaching/ses/).
+
 #### Sessy Library?
 
 > A Library Management Simulation WebApp for the 'SES' (Software Engineering Skills) course
