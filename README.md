@@ -1,12 +1,10 @@
 # SESsy Library
 
-Deel van het vak [Software Engineering Skills](https://brainbaking.com/teaching/ses/).
-
 #### Sessy Library?
 
 > A Library Management Simulation WebApp for the 'SES' (Software Engineering Skills) course
 
-Course Home: https://brainbaking.com/teaching/ses/
+Part of the course [Software Engineering Skills](https://brainbaking.com/teaching/ses/) at Faculty of [Engineering Technology](https://iiw.kuleuven.be), KU Leuven, Belgium.
 
 ### Minimum Requirements
 
@@ -41,7 +39,8 @@ Your project should be running at `http://localhost:8080` now.
 
 ### What should I do with this?
 
-TODO
+1. The application will be used during labs as part of multiple exercises. 
+2. Fix the Open [Github Issues](https://github.com/KULeuven-Diepenbeek/sessylibrary/issues). You will need to create a Fork, as this repository is the example one where no merges will be accepted. 
 
 ### Resources
 
