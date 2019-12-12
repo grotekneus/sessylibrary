@@ -5,7 +5,7 @@ import be.kuleuven.sessylibrary.domain.user.User;
 public class BookLendService {
 
     public void lend(Book book, User user) {
-        // TODO unit test me!
+        // TODO unit test m
         book.borrow();
     }
 
