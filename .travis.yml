@@ -9,7 +9,9 @@ env:
 before_install:
   - nvm install $NODE_VERSION
   - nvm use $NODE_VERSION
-  - cd frontend && npm install
+  - pushd frontend
+  - npm install
+  - popd
 
 install:
   - ./gradlew check
