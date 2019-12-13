@@ -11,9 +11,10 @@ before_install:
   - nvm use $NODE_VERSION
   - pushd frontend
   - npm install
+  - mkdir dist
   - popd
 
 install:
   - ./gradlew check
-  - ./gradlew frontendSync
+  - ./gradlew frontendSync --stacktrace
   - ./gradlew shadowJar
