@@ -1,5 +1,7 @@
 # SESsy Library
 
+[![travis build](https://travis-ci.org/KULeuven-Diepenbeek/sessylibrary.svg?branch=master)](https://travis-ci.org/KULeuven-Diepenbeek/sessylibrary)
+
 #### Sessy Library?
 
 > A Library Management Simulation WebApp for the 'SES' (Software Engineering Skills) course
