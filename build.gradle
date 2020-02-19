@@ -52,6 +52,27 @@ shadowJar {
     exclude '*.DSA', '*.SF', '*.RSA'
 }
 
+task createStartScripts(type: CreateStartScripts) {
+    outputDir = file('build/sample')
+    mainClassName = 'org.gradle.test.Main'
+    applicationName = 'myApp'
+    classpath = files('path/to/some.jar')
+}
+
+
+task serve(dependsOn: shadowJar) {
+    doLast {
+        javaexec {
+            main = "-jar"
+            args = [
+                    "build/libs/sessylibrary-1.0-SNAPSHOT-all.jar",
+                    "server",
+                    "app.yml"
+            ]
+        }
+    }
+}
+
 dependencies {
     compile group: 'io.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
     compile group: 'io.dropwizard', name: 'dropwizard-assets', version: dropwizardVersion
