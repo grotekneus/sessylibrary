@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class BooksRepositoryTests extends BaseIntegrationTestCase {
+public class BooksRepositoryIntegrationTests extends BaseIntegrationTestCase {
 
     private BooksRepository repository;
 

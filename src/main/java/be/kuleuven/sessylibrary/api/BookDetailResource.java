@@ -1,6 +1,7 @@
 package be.kuleuven.sessylibrary.api;
 
 import be.kuleuven.sessylibrary.domain.Book;
+import be.kuleuven.sessylibrary.domain.BooksRepository;
 import org.jdbi.v3.core.Jdbi;
 
 import javax.ws.rs.GET;
@@ -13,6 +14,10 @@ import java.util.Optional;
 @Path("/get-book")
 @Produces(MediaType.APPLICATION_JSON)
 public class BookDetailResource extends BooksResource {
+
+    public BookDetailResource(BooksRepository repository) {
+        super(repository);
+    }
 
     public BookDetailResource(Jdbi dbInstance) {
         super(dbInstance);

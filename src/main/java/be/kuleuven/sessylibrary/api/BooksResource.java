@@ -10,6 +10,10 @@ public abstract class BooksResource {
 
     protected final BooksRepository booksRepository;
 
+    public BooksResource(BooksRepository repository) {
+        this.booksRepository = repository;
+    }
+
     public BooksResource(Jdbi dbInstance) {
         this.booksRepository = dbInstance.onDemand(BooksRepository.class);
     }

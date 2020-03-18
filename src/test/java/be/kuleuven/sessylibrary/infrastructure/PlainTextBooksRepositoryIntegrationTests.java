@@ -17,7 +17,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class PlainTextBooksRepositoryTests {
+public class PlainTextBooksRepositoryIntegrationTests {
 
     private PlainTextBooksRepository repository;
 
