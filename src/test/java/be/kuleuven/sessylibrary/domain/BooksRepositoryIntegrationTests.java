@@ -1,10 +1,7 @@
 package be.kuleuven.sessylibrary.domain;
 
 import be.kuleuven.sessylibrary.BaseIntegrationTestCase;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,13 +11,13 @@ public class BooksRepositoryIntegrationTests extends BaseIntegrationTestCase {
 
     private BooksRepository repository;
 
-    @BeforeAll
+    @BeforeEach
     public void setUpRepo() {
         this.repository = getDb().onDemand(BooksRepository.class);
         this.repository.createTable();
     }
 
-    @AfterAll
+    @AfterEach
     public void tearDown() {
         cleanupDb();
     }

@@ -27,6 +27,7 @@ public abstract class BaseIntegrationTestCase {
                         }
                     }
                 });
+        db = null;
     }
 
     protected Jdbi getDb() {

@@ -1,7 +1,6 @@
 package be.kuleuven.sessylibrary.scenarios;
 
 import be.kuleuven.sessylibrary.BaseScenarioTestCase;
-import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -49,7 +48,8 @@ public class FindingBooksScenarioTests extends BaseScenarioTestCase {
         assertThat(boekDetailContainer.getText(), containsString(titel));
     }
 
-    @Test
+    //disabled for Travis CI demonstrative purposes
+    //@Test
     public void searchesForBook_ClicksOnDetail() {
         driver().get("http://localhost:8080");
 
