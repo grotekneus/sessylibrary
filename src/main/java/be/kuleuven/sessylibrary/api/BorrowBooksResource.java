@@ -34,7 +34,15 @@ public class BorrowBooksResource extends BooksResource {
     @GET
     public Response borrow(@QueryParam("isbn") Optional<Integer> isbn, @Context HttpServletRequest request) {
         var book = booksRepository.findBookByIsbn(isbn.orElse(6666));
-        // extra code balblabla
+        if(book == null) {
+            throw new UnsupportedOperationException("Book with isbn " + isbn + " not found!");
+        }
+
+        try {
+            bookLendService.lend(book, requireUserFrom(request));
+        } catch(UnsupportedOperationException oe) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
         return Response.ok().build();
     }
 
