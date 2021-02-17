@@ -15,7 +15,7 @@ Part of the course [Software Engineering Skills](https://brainbaking.com/teachin
 
 [Upgrading the Gradle wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html) can be done using:
 
-> `$ ./gradlew wrapper --gradle-version 6.0`
+> `$ ./gradlew wrapper --gradle-version 6.3`
 
 ### Components
 
@@ -23,6 +23,14 @@ Part of the course [Software Engineering Skills](https://brainbaking.com/teachin
 
 [DropWizard](http://www.dropwizard.io/en/stable/) Java RESTful API that integrates Jetty/Jackson/... functionality in a nice all-in-one package. 
 This means executing the jar automatically bootstraps a webserver, and REST calls can be easily added using `javax.ws` annotations. See `be.kuleuven.sessylibrary.api` classes for examples.
+
+**Building**:
+
+1. One can create a big jar using the `./gradlew shadowjar` command. Run this big whopper using `java -jar build\libs\sessylibrary-1.0-SNAPSHOT-all.jar server app.yml`.
+2. Simpler: just instruct gradle to boot locally using `./gradlew serve`.
+3. Using an IDE: Run the class `be.kuleuven.sessylibrary.SessyLibApplication` with the arguments "server app.yml". 
+
+After that, your project should be running at `http://localhost:8080` now.
 
 #### Frontend
 
