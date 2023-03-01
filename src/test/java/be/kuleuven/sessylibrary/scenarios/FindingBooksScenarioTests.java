@@ -1,6 +1,7 @@
 package be.kuleuven.sessylibrary.scenarios;
 
 import be.kuleuven.sessylibrary.BaseScenarioTestCase;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;

@@ -10,12 +10,12 @@ Part of the course [Software Engineering Skills](https://brainbaking.com/teachin
 
 ### Minimum Requirements
 
-* Java 10.x or higher (see `build.gradle`)
-* Gradle 5.6.x or higher (see `gradlew --version`output)
+* Java 12.x or higher (see `build.gradle`)
+* Gradle 6.7.x or higher (see `gradlew --version`output)
 
 [Upgrading the Gradle wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html) can be done using:
 
-> `$ ./gradlew wrapper --gradle-version 6.3`
+> `$ ./gradlew wrapper --gradle-version 6.7`
 
 ### Components
 

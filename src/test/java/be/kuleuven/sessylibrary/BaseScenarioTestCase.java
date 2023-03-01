@@ -6,20 +6,22 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
+import java.time.Duration;
 
 public abstract class BaseScenarioTestCase {
 
     private Class<? extends RemoteWebDriver> driverClass;
     protected WebDriver driverInstance;
-    private static final int WAIT_SECONDS = 10;
+    private static final Duration WAIT_SECONDS = Duration.ofSeconds(10);
 
     private String getFullPathOf(String resourceName) throws URISyntaxException {
         return Paths.get(getClass().getClassLoader().getResource(resourceName).toURI()).toFile().getAbsolutePath();
@@ -29,14 +31,16 @@ public abstract class BaseScenarioTestCase {
         try {
             var os = System.getProperty("os.name").toLowerCase();
             if(os.contains("mac")) {
-                System.setProperty("webdriver.opera.driver", getFullPathOf("mac_operadriver"));
-                this.driverClass = OperaDriver.class;
+                // See https://github.com/mozilla/geckodriver for newer Firefox versions. Also works on ARM64
+                System.setProperty("webdriver.chrome.driver", getFullPathOf("geckodriver"));
+                this.driverClass = FirefoxDriver.class;
             } else if(os.contains("win")) {
-                System.setProperty("webdriver.ie.driver", getFullPathOf("win_iedriver.exe"));
-                this.driverClass = InternetExplorerDriver.class;
+                // See https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/ - assumes x64
+                System.setProperty("webdriver.edge.driver", getFullPathOf("msedgedriver.exe"));
+                this.driverClass = EdgeDriver.class;
             } else {
-                // https://chromedriver.storage.googleapis.com/index.html?path=79.0.3945.36/
-                System.setProperty("webdriver.chrome.driver", getFullPathOf("linux_chromedriver"));
+                // See latest in https://chromedriver.storage.googleapis.com/index.html - assumes AMD64
+                System.setProperty("webdriver.chrome.driver", getFullPathOf("chromedriver_linux64"));
                 this.driverClass = ChromeDriver.class;
             }
         } catch (URISyntaxException e) {
@@ -76,8 +80,7 @@ public abstract class BaseScenarioTestCase {
     @AfterEach
     protected void tearDownDriver() {
         if(driverInstance != null) {
-            driverInstance.close();
-            driverInstance.quit();
+            driverInstance.close(); // also quits automatically.
         }
     }
 
