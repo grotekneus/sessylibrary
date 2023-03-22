@@ -48,5 +48,5 @@ jobs:
       # run tests!
       - run: gradle test
        #run gradle stuff and exercise stuff
-      - run: gradlew shadowjar
+      - run: gradle shadowjar
 
