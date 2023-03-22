@@ -28,7 +28,7 @@ jobs:
     before_steps:
       - run: cd frontend 
       - npm install
-      - cd ..
+      - run: cd ..
     steps:
       - checkout
       # Download and cache dependencies
