@@ -27,7 +27,7 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-
+      - run: cd frontend; npm install; cd ..;
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -44,7 +44,4 @@ jobs:
 
       # run tests!
       - run: gradle test
-      # runrandomshit
-      - run: npm install
-          paths:
-            - ~/frontend
+
