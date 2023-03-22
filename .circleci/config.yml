@@ -25,9 +25,13 @@ jobs:
       TERM: dumb
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    before_steps:
+      run: cd frontend; npm install; cd ..;
     steps:
       - checkout
-      - run: cd frontend; npm install; cd ..;
+      - run: cd frontend
+      - npm install
+      - cd ..
       # Download and cache dependencies
       - restore_cache:
           keys:
