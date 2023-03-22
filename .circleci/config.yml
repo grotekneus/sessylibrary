@@ -46,4 +46,5 @@ jobs:
       - run: gradle test
       # runrandomshit
       - run: npm install
+        paths:
         - ~/frontend
